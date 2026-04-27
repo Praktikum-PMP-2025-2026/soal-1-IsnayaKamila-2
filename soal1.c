@@ -56,24 +56,33 @@ void Median (int*arr, int N){
 }
 
 int main (){
-    int N;
-    scanf("%d", &N);
-    int arr[N];
-    int *arr = (int*)malloc(N * sizeof(int)); // Alokasi memori untuk array dinamis
-
-    while (N!= -1 ){
-        scanf("%d", &N);
-    for (int i = 0; i < N; i++){
-        scanf("%d",&arr[i]);
+    int capacity = 5; // kapasitas awal array
+    int N = 0;
+    int x;
+    int *arr = (int*)malloc(capacity * sizeof(int)); // 
+    if (arr == NULL){
+        printf("Memory allocation failed\n");
+        return 0 ;
     }
+    while (x != -1){
+        scanf("%d", &x);
+        if (N == capacity){ // jika kapasitas array sudah penuh, alokasikan ulang dengan kapasitas yang lebih besar
+            capacity *= 2;
+            int *temp = (int*)realloc(arr, capacity * sizeof(int));
+            if (temp == NULL){
+                printf("Memory reallocation failed\n");
+                free(arr);
+                return 0 ;
+            }
+            arr = temp;
+        }
+        arr[N] = x; // simpan angka yang dimasukkan ke dalam array
+        N++;
     }
-
-
-    Count_Array(arr, N); // Memanggil fungsi untuk menghitung jumlah elemen
-    urutan(arr, N); // Memanggil fungsi untuk mengurutkan array
-    printSortedArray(arr, N); // Memanggil fungsi untuk mencetak array yang sudah diurutkan
-    Median(arr, N); // Memanggil fungsi untuk menentukan median
-
+    Count_Array(arr, N-1); // panggil fungsi untuk menghitung jumlah elemen dalam array 
+    urutan(arr, N-1); // panggil fungsi untuk mengurutkan array
+    printSortedArray(arr, N-1); // panggil fungsi untuk mencetak array yang sudah diurutkan
+    Median(arr, N-1); // panggil fungsi untuk menentukan median
+    free(arr); // bebaskan memori yang dialokasikan untuk array
     return 0;
-
 }
