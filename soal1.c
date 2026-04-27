@@ -3,7 +3,7 @@
  *   Hari dan Tanggal    : Senin, 27 April 2026
  *   Nama (NIM)          : Isnaya Zalfa Kamila (13224028)
  *   Nama File           : nomor1.c
- *   Deskripsi           : 
+ *   Deskripsi           : Program menghitung jumlah elemen dalam array, mengurutkan array, dan menentukan median 
  */
 
 
@@ -12,12 +12,9 @@
 #include <stdbool.h>
 
 // Fungsi untuk menghitung jumlah elemen dalam array 
-void Count_Array (){
-    int N ;
-    int ukuran = sizeof(N);
-    int length = sizeof(N) / ukuran;
-    printf("COUNT %d ", length);
-}
+ void Count_Array (int arr[], int N){
+    printf("COUNT %d ", N);
+ }
 // FUNGSI UNTUK SORTING ARRAY 
 void tukar (int*a, int*b){
     int temp = *a;
@@ -57,21 +54,26 @@ void Median (int*arr, int N){
         printf("MEDIAN %d ", arr[N/2]);
     }
 }
+
 int main (){
-    int N ;
-    int ukuran = sizeof(N);
-    int* arr = (int*) malloc(N * sizeof(int));
-    while (N!= -1){
+    int N;
+    scanf("%d", &N);
+    int arr[N];
+    int *arr = (int*)malloc(N * sizeof(int)); // Alokasi memori untuk array dinamis
+
+    while (N!= -1 ){
         scanf("%d", &N);
-        if (N == -1){
-            break;
-        }
-        break;
+    for (int i = 0; i < N; i++){
+        scanf("%d",&arr[i]);
     }
-    Count_Array();
-    urutan(arr, N);
-    printSortedArray(arr, N);
-    Median(arr, N);
-    free(arr); 
+    }
+
+
+    Count_Array(arr, N); // Memanggil fungsi untuk menghitung jumlah elemen
+    urutan(arr, N); // Memanggil fungsi untuk mengurutkan array
+    printSortedArray(arr, N); // Memanggil fungsi untuk mencetak array yang sudah diurutkan
+    Median(arr, N); // Memanggil fungsi untuk menentukan median
+
     return 0;
+
 }
